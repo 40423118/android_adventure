@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>2016Fall 電腦輔助設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-08-19T03:06:00+08:00</updated><entry><title>android studio 安裝教學</title><link href="./android-studio-an-zhuang-jiao-xue.html" rel="alternate"></link><published>2017-08-19T03:06:00+08:00</published><updated>2017-08-19T03:06:00+08:00</updated><author><name>40423118</name></author><id>tag:,2017-08-19:./android-studio-an-zhuang-jiao-xue.html</id><summary type="html">&lt;!-- PELICAN_END_SUMMARY --&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>2016Fall 電腦輔助設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-08-22T02:16:00+08:00</updated><entry><title>android studio 模擬器安裝教學</title><link href="./android-studio-mo-ni-qi-an-zhuang-jiao-xue.html" rel="alternate"></link><published>2017-08-22T02:16:00+08:00</published><updated>2017-08-22T02:16:00+08:00</updated><author><name>40423118</name></author><id>tag:,2017-08-22:./android-studio-mo-ni-qi-an-zhuang-jiao-xue.html</id><summary type="html">&lt;!-- PELICAN_END_SUMMARY --&gt;
+
+&lt;p&gt;因為不可能叫大家都買一支手機來實測app的情況,所以android studio有模擬器可以使用,但是若電腦不是SSD硬碟的話,速度會很緩慢
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/_xA3URzFpa0" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;p&gt;一般的情況下桌上型電腦因為VT-X虛擬技術需要透過BIOS打開,步驟如下
+&lt;iframe width="560" height="315" src="https://support.lenovo.com/tw/zh/solutions/ht500006" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;p&gt;Intel加速器下載網址
+&lt;iframe width="560" height="315" src="https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager/" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/p&gt;</summary><category term="HW"></category></entry><entry><title>android studio 安裝教學</title><link href="./android-studio-an-zhuang-jiao-xue.html" rel="alternate"></link><published>2017-08-19T03:06:00+08:00</published><updated>2017-08-19T03:06:00+08:00</updated><author><name>40423118</name></author><id>tag:,2017-08-19:./android-studio-an-zhuang-jiao-xue.html</id><summary type="html">&lt;!-- PELICAN_END_SUMMARY --&gt;
 
 &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/Z6GooBcn02o" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
 
