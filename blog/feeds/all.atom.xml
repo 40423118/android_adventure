@@ -1,23 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>2016Fall 電腦輔助設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-09-16T04:40:00+08:00</updated><entry><title>android studio app之Wi-Fi開啟、偵測、連線、中斷、IP轉換</title><link href="./android-studio-appzhi-wi-fikai-qi-zhen-ce-lian-xian-zhong-duan-ipzhuan-huan.html" rel="alternate"></link><published>2017-09-16T04:40:00+08:00</published><updated>2017-09-16T04:40:00+08:00</updated><author><name>40423118</name></author><id>tag:,2017-09-16:./android-studio-appzhi-wi-fikai-qi-zhen-ce-lian-xian-zhong-duan-ipzhuan-huan.html</id><summary type="html">&lt;h1&gt;施工中.....&lt;/h1&gt;
-&lt;p&gt;
-Android權限設定
-===&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://developer.android.com/guide/topics/manifest/uses-permission-element.html"&gt;關於uses-permission&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://joeshua.pixnet.net/blog/post/37037485-android-%E6%AC%8A%E9%99%90%E8%A8%AD%E5%AE%9A"&gt;各式各樣的uses-permission&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;首先找到AndroidManifest.xml這個資料夾&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://imgur.com/pI7i9xG"&gt;&lt;img src="https://i.imgur.com/pI7i9xG.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;在AndroidManifest.xml加入Wi-Fi讀取權限與更改Wi-Fi權限&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://imgur.com/oJ7cheI"&gt;&lt;img src="https://i.imgur.com/oJ7cheI.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;程式碼&lt;/p&gt;
-&lt;p&gt;&lt;uses-permission android:name=
-"android.permission.ACCESS_WIFI_STATE" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;uses-permission android:name=
-"android.permission.CHANGE_WIFI_STATE"/&gt;&lt;/p&gt;
-&lt;h1&gt;介面設計&lt;/h1&gt;
-&lt;p&gt;&lt;a href="https://imgur.com/Nu10f7Q"&gt;&lt;img src="https://i.imgur.com/Nu10f7Q.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1&gt;ScrollView語法&lt;/h1&gt;
-&lt;p&gt;ScrollView&lt;/p&gt;</summary><category term="HW"></category></entry><entry><title>android studio app之簡易計算機</title><link href="./android-studio-appzhi-jian-yi-ji-suan-ji.html" rel="alternate"></link><published>2017-09-11T01:06:00+08:00</published><updated>2017-09-11T01:06:00+08:00</updated><author><name>40423118</name></author><id>tag:,2017-09-11:./android-studio-appzhi-jian-yi-ji-suan-ji.html</id><summary type="html">&lt;h1&gt;施工中.....&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>2016Fall 電腦輔助設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-09-11T01:06:00+08:00</updated><entry><title>android studio app之簡易計算機</title><link href="./android-studio-appzhi-jian-yi-ji-suan-ji.html" rel="alternate"></link><published>2017-09-11T01:06:00+08:00</published><updated>2017-09-11T01:06:00+08:00</updated><author><name>40423118</name></author><id>tag:,2017-09-11:./android-studio-appzhi-jian-yi-ji-suan-ji.html</id><summary type="html">&lt;h1&gt;施工中.....&lt;/h1&gt;
 
 
 &lt;p&gt;介面設計&lt;/p&gt;
