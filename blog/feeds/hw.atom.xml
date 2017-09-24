@@ -97,7 +97,7 @@
 &lt;h1&gt;JAVA程式&lt;/h1&gt;
 &lt;p&gt;&lt;a href="https://imgur.com/tIsHRIs"&gt;&lt;img src="https://i.imgur.com/tIsHRIs.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://imgur.com/OiuHaGQ"&gt;&lt;img src="https://i.imgur.com/OiuHaGQ.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://imgur.com/k1RhcWS"&gt;&lt;img src="https://i.imgur.com/k1RhcWS.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://imgur.com/w9wNqJT"&gt;&lt;img src="https://i.imgur.com/w9wNqJT.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://imgur.com/7TdzyqG"&gt;&lt;img src="https://i.imgur.com/7TdzyqG.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1&gt;this&lt;/h1&gt;
 &lt;p&gt;我們回到上面的this
@@ -122,8 +122,194 @@
 &lt;h1&gt;super&lt;/h1&gt;
 &lt;p&gt;&lt;a href="https://imgur.com/e19s7Zu"&gt;&lt;img src="https://i.imgur.com/e19s7Zu.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://charleslin74.pixnet.net/blog/post/434409800-%5Bjava%5D-super%E7%9A%84%E7%94%A8%E6%B3%95"&gt;關於super用法&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;程式碼&lt;/h1&gt;
+&lt;p&gt;package com.example.user.wifi_2;&lt;/p&gt;
+&lt;p&gt;import android.content.BroadcastReceiver;&lt;/p&gt;
+&lt;p&gt;import android.content.Context;&lt;/p&gt;
+&lt;p&gt;import android.content.IntentFilter;&lt;/p&gt;
+&lt;p&gt;import android.net.wifi.WifiConfiguration;&lt;/p&gt;
+&lt;p&gt;import android.net.wifi.WifiInfo;&lt;/p&gt;
+&lt;p&gt;import android.net.wifi.WifiManager;&lt;/p&gt;
+&lt;p&gt;import android.support.v7.app.AppCompatActivity;&lt;/p&gt;
+&lt;p&gt;import android.os.Bundle;&lt;/p&gt;
+&lt;p&gt;import android.util.Log;&lt;/p&gt;
+&lt;p&gt;import android.view.View;&lt;/p&gt;
+&lt;p&gt;import android.widget.Button;&lt;/p&gt;
+&lt;p&gt;import android.widget.TextView;&lt;/p&gt;
+&lt;p&gt;import android.widget.Toast;&lt;/p&gt;
+&lt;p&gt;import java.util.List;&lt;/p&gt;
+&lt;p&gt;import static com.example.user.wifi_2.R.id.info;&lt;/p&gt;
+&lt;p&gt;public class MainActivity extends AppCompatActivity implements     View.OnClickListener {&lt;/p&gt;
+&lt;p&gt;private static final String TAG="繃繃包";
+    WifiManager wifi;
+    BroadcastReceiver receiver;&lt;/p&gt;
+&lt;table class="codehilitetable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; TextView text;
+
+ Button  but;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    text=(TextView)findViewById(R.id.text);
+    but=(Button)findViewById(R.id.but1);
+    but.setOnClickListener(this);
+
+    wifi=(WifiManager)getSystemService(Context.WIFI_SERVICE);
+    WifiInfo info=wifi.getConnectionInfo();
+    text.append(&amp;quot;\n\nwifi status ;&amp;quot;+info.toString());
+
+
+
+
+    List&amp;lt;WifiConfiguration&amp;gt; configurations=wifi.getConfiguredNetworks();
+    for(WifiConfiguration configuration :configurations){
+        text.append(&amp;quot;\n\n&amp;quot; +configuration.toString());
+    }
+
+    if(receiver==null)
+        receiver=new WifiScaner(this);
+    registerReceiver(receiver,new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+    Log.d(TAG, &amp;quot;onCreate()&amp;quot;);
+
+}
+
+@Override
+public void onStop() {
+    unregisterReceiver(receiver);
+    super.onStop();
+
+
+}
+@Override
+public void onClick(View view) {
+    Toast.makeText(getApplicationContext(),&amp;quot;ALL WIFI seached~~&amp;quot;,0).show();
+    if(view.getId()==R.id.but1){
+        Log.d(TAG, &amp;quot;onCreat() wifi.startScan()&amp;quot;);
+        wifi.startScan();
+    }
+
+}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;}&lt;/p&gt;
 &lt;p&gt;接著對WifiScaner按alt+Enter寫立一個新的java檔&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://imgur.com/VdNjtEd"&gt;&lt;img src="https://i.imgur.com/VdNjtEd.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;</summary><category term="HW"></category></entry><entry><title>android studio app之簡易計算機</title><link href="./android-studio-appzhi-jian-yi-ji-suan-ji.html" rel="alternate"></link><published>2017-09-11T01:06:00+08:00</published><updated>2017-09-11T01:06:00+08:00</updated><author><name>40423118</name></author><id>tag:,2017-09-11:./android-studio-appzhi-jian-yi-ji-suan-ji.html</id><summary type="html">&lt;h1&gt;施工中.....&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://imgur.com/VdNjtEd"&gt;&lt;img src="https://i.imgur.com/VdNjtEd.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;程式碼&lt;/h1&gt;
+&lt;p&gt;package com.example.user.wifi_2;&lt;/p&gt;
+&lt;p&gt;import android.content.BroadcastReceiver;&lt;/p&gt;
+&lt;p&gt;import android.content.Context;&lt;/p&gt;
+&lt;p&gt;import android.content.Intent;&lt;/p&gt;
+&lt;p&gt;import android.net.wifi.WifiManager;&lt;/p&gt;
+&lt;p&gt;import android.nfc.Tag;&lt;/p&gt;
+&lt;p&gt;import android.util.Log;&lt;/p&gt;
+&lt;p&gt;import android.widget.Toast;&lt;/p&gt;
+&lt;p&gt;import java.util.List;&lt;/p&gt;
+&lt;p&gt;class WifiScaner extends BroadcastReceiver {&lt;/p&gt;
+&lt;table class="codehilitetable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;private  static final String TAG=&amp;quot;WifiscanReceiver&amp;quot;;
+MainActivity main;
+
+
+public WifiScaner(MainActivity mainActivity) {
+    super();
+    this.main=main;
+
+}
+
+
+@Override
+public void onReceive(Context context, Intent intent) {
+    List&amp;lt;android.net.wifi.ScanResult&amp;gt; results=main.wifi.getScanResults();
+    android.net.wifi.ScanResult bestsignal =null;
+    for(android.net.wifi.ScanResult result:results){
+        if(bestsignal==null|| WifiManager.compareSignalLevel(bestsignal.level, result.level)&amp;lt;0)
+            bestsignal=result;
+    }
+
+    String message=String.format(&amp;quot;%s networks found.%s is the strongest.&amp;quot;,results.size(), results.size(),bestsignal.SSID);
+    Toast.makeText(main, message, 0).show();
+    Log.d(TAG, &amp;quot;onReceive() message :&amp;quot; +message);
+
+
+}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;}&lt;/p&gt;</summary><category term="HW"></category></entry><entry><title>android studio app之簡易計算機</title><link href="./android-studio-appzhi-jian-yi-ji-suan-ji.html" rel="alternate"></link><published>2017-09-11T01:06:00+08:00</published><updated>2017-09-11T01:06:00+08:00</updated><author><name>40423118</name></author><id>tag:,2017-09-11:./android-studio-appzhi-jian-yi-ji-suan-ji.html</id><summary type="html">&lt;h1&gt;施工中.....&lt;/h1&gt;
 
 
 &lt;p&gt;介面設計&lt;/p&gt;

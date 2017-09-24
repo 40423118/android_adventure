@@ -410,7 +410,7 @@ init_mathjax();
 <h1>JAVA程式</h1>
 <p><a href="https://imgur.com/tIsHRIs"><img src="https://i.imgur.com/tIsHRIs.png" title="source: imgur.com" /></a></p>
 <p><a href="https://imgur.com/OiuHaGQ"><img src="https://i.imgur.com/OiuHaGQ.png" title="source: imgur.com" /></a></p>
-<p><a href="https://imgur.com/k1RhcWS"><img src="https://i.imgur.com/k1RhcWS.png" title="source: imgur.com" /></a></p>
+<p><a href="https://imgur.com/w9wNqJT"><img src="https://i.imgur.com/w9wNqJT.png" title="source: imgur.com" /></a></p>
 <p><a href="https://imgur.com/7TdzyqG"><img src="https://i.imgur.com/7TdzyqG.png" title="source: imgur.com" /></a></p>
 <h1>this</h1>
 <p>我們回到上面的this
@@ -435,8 +435,194 @@ init_mathjax();
 <h1>super</h1>
 <p><a href="https://imgur.com/e19s7Zu"><img src="https://i.imgur.com/e19s7Zu.png" title="source: imgur.com" /></a></p>
 <p><a href="http://charleslin74.pixnet.net/blog/post/434409800-%5Bjava%5D-super%E7%9A%84%E7%94%A8%E6%B3%95">關於super用法</a></p>
+<h1>程式碼</h1>
+<p>package com.example.user.wifi_2;</p>
+<p>import android.content.BroadcastReceiver;</p>
+<p>import android.content.Context;</p>
+<p>import android.content.IntentFilter;</p>
+<p>import android.net.wifi.WifiConfiguration;</p>
+<p>import android.net.wifi.WifiInfo;</p>
+<p>import android.net.wifi.WifiManager;</p>
+<p>import android.support.v7.app.AppCompatActivity;</p>
+<p>import android.os.Bundle;</p>
+<p>import android.util.Log;</p>
+<p>import android.view.View;</p>
+<p>import android.widget.Button;</p>
+<p>import android.widget.TextView;</p>
+<p>import android.widget.Toast;</p>
+<p>import java.util.List;</p>
+<p>import static com.example.user.wifi_2.R.id.info;</p>
+<p>public class MainActivity extends AppCompatActivity implements     View.OnClickListener {</p>
+<p>private static final String TAG="繃繃包";
+    WifiManager wifi;
+    BroadcastReceiver receiver;</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</pre></div></td><td class="code"><div class="codehilite"><pre><span></span> TextView text;
+
+ Button  but;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    text=(TextView)findViewById(R.id.text);
+    but=(Button)findViewById(R.id.but1);
+    but.setOnClickListener(this);
+
+    wifi=(WifiManager)getSystemService(Context.WIFI_SERVICE);
+    WifiInfo info=wifi.getConnectionInfo();
+    text.append(&quot;\n\nwifi status ;&quot;+info.toString());
+
+
+
+
+    List&lt;WifiConfiguration&gt; configurations=wifi.getConfiguredNetworks();
+    for(WifiConfiguration configuration :configurations){
+        text.append(&quot;\n\n&quot; +configuration.toString());
+    }
+
+    if(receiver==null)
+        receiver=new WifiScaner(this);
+    registerReceiver(receiver,new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+    Log.d(TAG, &quot;onCreate()&quot;);
+
+}
+
+@Override
+public void onStop() {
+    unregisterReceiver(receiver);
+    super.onStop();
+
+
+}
+@Override
+public void onClick(View view) {
+    Toast.makeText(getApplicationContext(),&quot;ALL WIFI seached~~&quot;,0).show();
+    if(view.getId()==R.id.but1){
+        Log.d(TAG, &quot;onCreat() wifi.startScan()&quot;);
+        wifi.startScan();
+    }
+
+}
+</pre></div>
+</td></tr></table>
+
+<p>}</p>
 <p>接著對WifiScaner按alt+Enter寫立一個新的java檔</p>
 <p><a href="https://imgur.com/VdNjtEd"><img src="https://i.imgur.com/VdNjtEd.png" title="source: imgur.com" /></a></p>
+<h1>程式碼</h1>
+<p>package com.example.user.wifi_2;</p>
+<p>import android.content.BroadcastReceiver;</p>
+<p>import android.content.Context;</p>
+<p>import android.content.Intent;</p>
+<p>import android.net.wifi.WifiManager;</p>
+<p>import android.nfc.Tag;</p>
+<p>import android.util.Log;</p>
+<p>import android.widget.Toast;</p>
+<p>import java.util.List;</p>
+<p>class WifiScaner extends BroadcastReceiver {</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>private  static final String TAG=&quot;WifiscanReceiver&quot;;
+MainActivity main;
+
+
+public WifiScaner(MainActivity mainActivity) {
+    super();
+    this.main=main;
+
+}
+
+
+@Override
+public void onReceive(Context context, Intent intent) {
+    List&lt;android.net.wifi.ScanResult&gt; results=main.wifi.getScanResults();
+    android.net.wifi.ScanResult bestsignal =null;
+    for(android.net.wifi.ScanResult result:results){
+        if(bestsignal==null|| WifiManager.compareSignalLevel(bestsignal.level, result.level)&lt;0)
+            bestsignal=result;
+    }
+
+    String message=String.format(&quot;%s networks found.%s is the strongest.&quot;,results.size(), results.size(),bestsignal.SSID);
+    Toast.makeText(main, message, 0).show();
+    Log.d(TAG, &quot;onReceive() message :&quot; +message);
+
+
+}
+</pre></div>
+</td></tr></table>
+
+<p>}</p>
             </div>
             <!-- /.entry-content -->
         </article>
