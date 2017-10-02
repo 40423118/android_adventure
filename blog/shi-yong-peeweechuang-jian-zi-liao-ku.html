@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>android studio 模擬器安裝教學 - 2016Fall 電腦輔助設計實習 (虎尾科大MDE)</title>
+    <title>使用peewee創建資料庫 - 2016Fall 電腦輔助設計實習 (虎尾科大MDE)</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -166,17 +166,17 @@ init_mathjax = function() {
 init_mathjax();
 </script>
 
-<link rel="canonical" href="./android-studio-mo-ni-qi-an-zhuang-jiao-xue.html">
+<link rel="canonical" href="./shi-yong-peeweechuang-jian-zi-liao-ku.html">
 
         <meta name="author" content="40423118" />
         <meta name="keywords" content="HW" />
 
         <meta property="og:site_name" content="2016Fall 電腦輔助設計實習 (虎尾科大MDE)" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="android studio 模擬器安裝教學"/>
-        <meta property="og:url" content="./android-studio-mo-ni-qi-an-zhuang-jiao-xue.html"/>
+        <meta property="og:title" content="使用peewee創建資料庫"/>
+        <meta property="og:url" content="./shi-yong-peeweechuang-jian-zi-liao-ku.html"/>
         <meta property="og:description" content=""/>
-        <meta property="article:published_time" content="2017-08-22" />
+        <meta property="article:published_time" content="2017-10-02" />
             <meta property="article:section" content="HW" />
             <meta property="article:tag" content="HW" />
             <meta property="article:author" content="40423118" />
@@ -286,10 +286,10 @@ init_mathjax();
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="./android-studio-mo-ni-qi-an-zhuang-jiao-xue.html"
+                    <a href="./shi-yong-peeweechuang-jian-zi-liao-ku.html"
                        rel="bookmark"
-                       title="Permalink to android studio 模擬器安裝教學">
-                        android studio 模擬器安裝教學
+                       title="Permalink to 使用peewee創建資料庫">
+                        使用peewee創建資料庫
                     </a>
                 </h1>
             </header>
@@ -299,7 +299,7 @@ init_mathjax();
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-08-22T02:16:00+08:00"> Tue 22 August 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-10-02T04:40:00+08:00"> Mon 02 October 2017</time>
     </span>
             <span class="label label-default">By</span>
             <a href="./author/40423118.html"><i class="fa fa-user"></i> 40423118</a>
@@ -313,13 +313,143 @@ init_mathjax();
                 </div>
                 <!-- PELICAN_END_SUMMARY -->
 
-<p>因為不可能叫大家都買一支手機來實測app的情況,所以android studio有模擬器可以使用,但是若電腦不是SSD硬碟的話,速度會很緩慢
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_xA3URzFpa0" frameborder="0" allowfullscreen></iframe></p>
-<p>一般的情況下桌上型電腦因為VT-X虛擬技術需要透過BIOS打開,步驟如下列網址</p>
-<p>https://support.lenovo.com/tw/zh/solutions/ht500006</p>
-<p>Intel加速器下載網址
-https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager/</p>
-<p>背景音樂:https://www.youtube.com/watch?v=JRQbVNzmCK0</p>
+<p><a href="http://docs.peewee-orm.com/en/latest/peewee/database.html">關於peewee</a></p>
+<p><a href="http://www.shushilvshe.com/python/peewee.html">peewee入門教程</a></p>
+<p>總共3個py檔</p>
+<p>分別為"資料庫","創建資料","讀取資料"</p>
+<h1>資料庫</h1>
+<pre class="brush: python">
+
+import os      
+from peewee import *    
+from datetime import date   
+
+fileName = 'data.db'    
+
+db = SqliteDatabase(fileName)   
+
+class Ball(Model):  
+    name = CharField() 
+    date = DateField()  
+    speed = CharField() 
+    class Meta:
+        database = db   
+
+
+if __name__=='__main__':    
+    fileExist = os.path.isfile(fileName)    
+
+    db.connect()        
+
+
+    db.create_tables([Ball], safe=True) 
+
+    if not fileExist:   
+
+        print("create") 
+
+        steven = Ball(name='steven', date=date(2017, 9, 30), speed='3m/s')   
+
+        steven.save()   
+
+    else:   
+        print("read")   
+
+        for ball in Ball.select():  
+            print(ball.name, ball.date, ball.speed)
+
+
+    db.close()  
+
+
+</pre>
+
+<p><a href="https://imgur.com/EgtHJ6u"><img src="https://i.imgur.com/EgtHJ6u.png" title="source: imgur.com" /></a></p>
+<p>os模組在python裡是用來處理一些檔案or路徑or目錄的問題</p>
+<p>而我們資料庫因需記錄時間所以也必須導入時間模組</p>
+<p><a href="https://ephrain.net/python-%E4%BD%BF%E7%94%A8-os.path-%E8%99%95%E7%90%86%E8%B7%AF%E5%BE%91%E5%95%8F%E9%A1%8C/">python os</a></p>
+<p><a href="http://tw.gitbook.net/python/python_date_time.html">python datatime</a></p>
+<p><a href="https://imgur.com/JqtXU4I"><img src="https://i.imgur.com/JqtXU4I.png" title="source: imgur.com" /></a></p>
+<p><a href="https://imgur.com/tSoCvYD"><img src="https://i.imgur.com/tSoCvYD.png" title="source: imgur.com" /></a></p>
+<p><a href="http://docs.peewee-orm.com/en/latest/peewee/models.html#model-options-and-table-metadata">關於Meta</a></p>
+<p><a href="https://imgur.com/5AhGGpJ"><img src="https://i.imgur.com/5AhGGpJ.png" title="source: imgur.com" /></a></p>
+<h1>執行結果</h1>
+<p>一開始數據庫不存在</p>
+<p><a href="https://imgur.com/bd94ACZ"><img src="https://i.imgur.com/bd94ACZ.png" title="source: imgur.com" /></a></p>
+<p>在執行一次後因為資料庫存在了便顯示read然後顯示出剛剛第一次執行創出來的資料</p>
+<p><a href="https://imgur.com/PDpOgKB"><img src="https://i.imgur.com/PDpOgKB.png" title="source: imgur.com" /></a></p>
+<h1>創建資料</h1>
+<p><pre class="brush: python">
+from peewee import *  <br />
+from datetime import date<br />
+from data import Ball, db   #導入data裡面寫好的資料表格式</p>
+<p>if <strong>name</strong>=='<strong>main</strong>':  <br />
+    db.connect()   </p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>db.create_tables([Ball],safe=True)
+
+print(&quot;create&quot;) #print create.
+
+steven = Ball(name=&#39;steven&#39;, date=date(2017, 9, 30), speed=&#39;3m/s&#39;)  #創建一筆叫做steven的資料,沿用在data.py裡寫好的格式
+
+steven.save()   # 將資料儲存在資料庫(database)裡
+
+goodhaha = Ball(name=&#39;goodhaha&#39;, date=date(2017, 10, 1), speed=&#39;2m/s&#39;)
+
+goodhaha.save()
+
+
+db.close()
+</pre></div>
+</td></tr></table>
+
+</pre>
+
+<h1>讀取資料</h1>
+<pre class="brush: python">
+
+from peewee import *    
+from data import Ball, db   
+
+if __name__=='__main__':    .
+    db.connect()    
+
+
+    print("read")  
+
+    db.create_tables([Ball], safe=True) 
+
+    for ball in Ball.select():  #檢索資料
+
+        print(ball.name, ball.date, ball.speed) #按照格式打印出資料
+
+
+
+    db.close()  #disconnect database.
+
+
+</pre>
+
+<h1>執行結果</h1>
+<p><a href="https://imgur.com/1Yxe5O3"><img src="https://i.imgur.com/1Yxe5O3.png" title="source: imgur.com" /></a></p>
+<h1>注意!!</h1>
+<p>這裡的寫法為串聯寫法(一行一行執行,若是某行出錯,以下的程式都不會執行)</p>
+<p><a href="https://imgur.com/GA7Twvv"><img src="https://i.imgur.com/GA7Twvv.png" title="source: imgur.com" /></a></p>
+<p>這樣不行</p>
+<p><a href="https://imgur.com/1teVbOu"><img src="https://i.imgur.com/1teVbOu.png" title="source: imgur.com" /></a></p>
+<p>這樣才可以</p>
             </div>
             <!-- /.entry-content -->
         </article>

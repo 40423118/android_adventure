@@ -1,5 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>2016Fall 電腦輔助設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/hw.atom.xml" rel="self"></link><id>./</id><updated>2017-09-16T04:40:00+08:00</updated><entry><title>android studio app之Wi-Fi開啟、偵測</title><link href="./android-studio-appzhi-wi-fikai-qi-zhen-ce.html" rel="alternate"></link><published>2017-09-16T04:40:00+08:00</published><updated>2017-09-16T04:40:00+08:00</updated><author><name>40423118</name></author><id>tag:,2017-09-16:./android-studio-appzhi-wi-fikai-qi-zhen-ce.html</id><summary type="html">&lt;h1&gt;施工中.....&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>2016Fall 電腦輔助設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/hw.atom.xml" rel="self"></link><id>./</id><updated>2017-10-02T04:40:00+08:00</updated><entry><title>使用peewee創建資料庫</title><link href="./shi-yong-peeweechuang-jian-zi-liao-ku.html" rel="alternate"></link><published>2017-10-02T04:40:00+08:00</published><updated>2017-10-02T04:40:00+08:00</updated><author><name>40423118</name></author><id>tag:,2017-10-02:./shi-yong-peeweechuang-jian-zi-liao-ku.html</id><summary type="html">&lt;!-- PELICAN_END_SUMMARY --&gt;
+
+&lt;p&gt;&lt;a href="http://docs.peewee-orm.com/en/latest/peewee/database.html"&gt;關於peewee&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.shushilvshe.com/python/peewee.html"&gt;peewee入門教程&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;總共3個py檔&lt;/p&gt;
+&lt;p&gt;分別為"資料庫","創建資料","讀取資料"&lt;/p&gt;
+&lt;h1&gt;資料庫&lt;/h1&gt;
+&lt;pre class="brush: python"&gt;
+
+import os      
+from peewee import *    
+from datetime import date   
+
+fileName = 'data.db'    
+
+db = SqliteDatabase(fileName)   
+
+class Ball(Model):  
+    name = CharField() 
+    date = DateField()  
+    speed = CharField() 
+    class Meta:
+        database = db   
+
+
+if __name__=='__main__':    
+    fileExist = os.path.isfile(fileName)    
+
+    db.connect()        
+
+
+    db.create_tables([Ball], safe=True) 
+
+    if not fileExist:   
+
+        print("create") 
+
+        steven = Ball(name='steven', date=date(2017, 9, 30), speed='3m/s')   
+
+        steven.save()   
+
+    else:   
+        print("read")   
+
+        for ball in Ball.select():  
+            print(ball.name, ball.date, ball.speed)
+
+
+    db.close()  
+
+
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href="https://imgur.com/EgtHJ6u"&gt;&lt;img src="https://i.imgur.com/EgtHJ6u.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;os模組在python裡是用來處理一些檔案or路徑or目錄的問題&lt;/p&gt;
+&lt;p&gt;而我們資料庫因需記錄時間所以也必須導入時間模組&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://ephrain.net/python-%E4%BD%BF%E7%94%A8-os.path-%E8%99%95%E7%90%86%E8%B7%AF%E5%BE%91%E5%95%8F%E9%A1%8C/"&gt;python os&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://tw.gitbook.net/python/python_date_time.html"&gt;python datatime&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://imgur.com/JqtXU4I"&gt;&lt;img src="https://i.imgur.com/JqtXU4I.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://imgur.com/tSoCvYD"&gt;&lt;img src="https://i.imgur.com/tSoCvYD.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://docs.peewee-orm.com/en/latest/peewee/models.html#model-options-and-table-metadata"&gt;關於Meta&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://imgur.com/5AhGGpJ"&gt;&lt;img src="https://i.imgur.com/5AhGGpJ.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;執行結果&lt;/h1&gt;
+&lt;p&gt;一開始數據庫不存在&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://imgur.com/bd94ACZ"&gt;&lt;img src="https://i.imgur.com/bd94ACZ.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在執行一次後因為資料庫存在了便顯示read然後顯示出剛剛第一次執行創出來的資料&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://imgur.com/PDpOgKB"&gt;&lt;img src="https://i.imgur.com/PDpOgKB.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;創建資料&lt;/h1&gt;
+&lt;p&gt;&lt;pre class="brush: python"&gt;
+from peewee import *  &lt;br /&gt;
+from datetime import date&lt;br /&gt;
+from data import Ball, db   #導入data裡面寫好的資料表格式&lt;/p&gt;
+&lt;p&gt;if &lt;strong&gt;name&lt;/strong&gt;=='&lt;strong&gt;main&lt;/strong&gt;':  &lt;br /&gt;
+    db.connect()   &lt;/p&gt;
+&lt;table class="codehilitetable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;db.create_tables([Ball],safe=True)
+
+print(&amp;quot;create&amp;quot;) #print create.
+
+steven = Ball(name=&amp;#39;steven&amp;#39;, date=date(2017, 9, 30), speed=&amp;#39;3m/s&amp;#39;)  #創建一筆叫做steven的資料,沿用在data.py裡寫好的格式
+
+steven.save()   # 將資料儲存在資料庫(database)裡
+
+goodhaha = Ball(name=&amp;#39;goodhaha&amp;#39;, date=date(2017, 10, 1), speed=&amp;#39;2m/s&amp;#39;)
+
+goodhaha.save()
+
+
+db.close()
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;/pre&gt;
+
+&lt;h1&gt;讀取資料&lt;/h1&gt;
+&lt;pre class="brush: python"&gt;
+
+from peewee import *    
+from data import Ball, db   
+
+if __name__=='__main__':    .
+    db.connect()    
+
+
+    print("read")  
+
+    db.create_tables([Ball], safe=True) 
+
+    for ball in Ball.select():  #檢索資料
+
+        print(ball.name, ball.date, ball.speed) #按照格式打印出資料
+
+
+
+    db.close()  #disconnect database.
+
+
+&lt;/pre&gt;
+
+&lt;h1&gt;執行結果&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://imgur.com/1Yxe5O3"&gt;&lt;img src="https://i.imgur.com/1Yxe5O3.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;注意!!&lt;/h1&gt;
+&lt;p&gt;這裡的寫法為串聯寫法(一行一行執行,若是某行出錯,以下的程式都不會執行)&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://imgur.com/GA7Twvv"&gt;&lt;img src="https://i.imgur.com/GA7Twvv.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;這樣不行&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://imgur.com/1teVbOu"&gt;&lt;img src="https://i.imgur.com/1teVbOu.png" title="source: imgur.com" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;這樣才可以&lt;/p&gt;</summary><category term="HW"></category></entry><entry><title>android studio app之Wi-Fi開啟、偵測</title><link href="./android-studio-appzhi-wi-fikai-qi-zhen-ce.html" rel="alternate"></link><published>2017-09-16T04:40:00+08:00</published><updated>2017-09-16T04:40:00+08:00</updated><author><name>40423118</name></author><id>tag:,2017-09-16:./android-studio-appzhi-wi-fikai-qi-zhen-ce.html</id><summary type="html">&lt;h1&gt;施工中.....&lt;/h1&gt;
 
 
 &lt;h1&gt;Android權限設定&lt;/h1&gt;
